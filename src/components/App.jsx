@@ -8,6 +8,8 @@ class App extends Component {
     searchWord: '',
     isOpenModal: false,
     elementByModal: null,
+    error: false,
+    errMessage: null,
   };
 
   getSearchWord = (searchWord) => {
@@ -29,7 +31,11 @@ class App extends Component {
   };
 
   render() {
-    const { searchWord, isOpenModal, elementByModal } = this.state;
+    const {
+      searchWord,
+      isOpenModal,
+      elementByModal,
+    } = this.state;
 
     return (
       <div>

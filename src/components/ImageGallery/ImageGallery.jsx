@@ -13,7 +13,7 @@ class ImageGallery extends Component {
     page: 1,
     loader: false,
     btnDisable: false,
-    errMessage: null,
+    error: null,
   };
 
   componentDidMount() {
@@ -43,10 +43,9 @@ class ImageGallery extends Component {
         images: images ? [...images, ...hits] : hits,
         totalPage: Number.parseInt(totalHits / PER_PAGE),
       }));
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
       this.setState({
-        errMessage: err.message,
+        error: error.message,
       });
     } finally {
       this.setState({ loader: false });
@@ -60,26 +59,23 @@ class ImageGallery extends Component {
   };
 
   render() {
-    const { images, page, loader, totalPage, errMessage } = this.state;
+    const { images, page, loader, totalPage, error } = this.state;
     const { searchWord, toggleModal } = this.props;
 
     return (
       <div>
         {loader && <Loader />}
-        {
-          images?.length > 0 ? (
-            <ul>
-              {images && images.map(i => (
-                <ImageGalleryItem
-                  key={i.id}
-                  image={i}
-                  toggleModal={toggleModal}
-                  getElForModal={this.props.getElForModal}
-                />
-              ))}
-            </ul>
-          ) : !loader && errMessage ? <h1>{errMessage}</h1> :
-            <h1>"{searchWord}" is not Defined</h1>
+        {error ? <h1>{error}</h1> :
+          images?.length > 0 ? <ul>
+            {images && images.map(i => (
+              <ImageGalleryItem
+                key={i.id}
+                image={i}
+                toggleModal={toggleModal}
+                getElForModal={this.props.getElForModal}
+              />
+            ))}
+          </ul> : !loader && <h1>{searchWord} is not defined</h1>
         }
         {
           images?.length > 0 && (

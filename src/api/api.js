@@ -7,7 +7,7 @@ axios.defaults.baseURL = BASE_URL;
 
 const imagesApi = async (page, searchWord, perPage) => {
   return axios(
-    `?key=${API_KEY}&q=${searchWord}s&page=${page}&per_page=${perPage}&image_type=photo&orientation=horizontal`);
+    `?key=${API_KEY}&q=${searchWord}&page=${page}&per_page=${perPage}&image_type=photo&orientation=horizontal`);
 };
 
 export { imagesApi };

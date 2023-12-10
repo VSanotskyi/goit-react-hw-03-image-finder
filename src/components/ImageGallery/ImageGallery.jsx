@@ -26,7 +26,7 @@ class ImageGallery extends Component {
     }
 
     if (this.props.searchWord !== prevProps.searchWord) {
-      this.setState({ images: [] });
+      this.setState({ images: [], page: 1 });
       this.getImagesBySearchWord();
     }
   }
@@ -62,6 +62,7 @@ class ImageGallery extends Component {
     const { images, page, loader, totalPage, error } = this.state;
     const { searchWord, toggleModal } = this.props;
 
+    console.log(page);
     return (
       <div>
         {loader && <Loader />}
